@@ -152,6 +152,7 @@ plot(t_points, x_points, 'b*');
 hold on
 p12=stairs(t,x,'b');
 set(p12,'LineWidth',3);
+grid on
 xlabel('t [s]');
 ylabel('x [m]');
 title('Motion profile')
@@ -162,6 +163,7 @@ plot(t_points, v_points, 'r*');
 hold on
 p22=stairs(t,v,'r');
 set(p22,'LineWidth',3);
+grid on
 xlabel('t [s]');
 ylabel('v [m/s]');
 title('Velocity profile')
@@ -170,6 +172,7 @@ f3= figure;
 set(f3, 'DefaultLineLineWidth',3);
 p22=stairs(t,a,'k');
 set(p22,'LineWidth',3);
+grid on
 xlabel('t [s]');
 ylabel('a [m/s^2]');
 title('Acceleration profile')
