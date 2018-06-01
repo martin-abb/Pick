@@ -139,6 +139,16 @@ else    % delta_1 >= eps
         end
     end     % v_coll reached WITHIN uncertainty zone
     
+    %
+    %   add code here for when v_coll NOT reached WITHIN uncertainty zone,
+    %   in this case, there is no dwell time at v_coll, just straight accel
+    %   / decel at a velocity that is already smaller than v_coll in the uncertainty zone
+    
+    %   There will also be a case for when you need to limit velocity in
+    %   the uncertainty zone BUT you don't achieve v_max in the
+    %   remainder of the move
+    
+    
     
     
 end     %   Calculate motion profile WITH uncertainty
