@@ -1,7 +1,14 @@
 %
-%   analyze_002.m
+%   analyze_003.m
 %
 %   Martin Krucinski
+%
+%   v_003 is used by a sweep algorithm to return tf (almost as a
+%   function...)
+%   Input arguments are:
+%       v_coll
+%       delta_1
+
 
 g       = 9.81;     % [m/s^2]       Gravity acceleration
 cm      = 0.01;     % [m]           1 centimeter
@@ -10,15 +17,22 @@ Ts      = 1e-3;     % [s]           motion profile sample time
 
 a_max   = 24;%***2.0*g;      % [m/s^2]       Max acceleration
 v_max   = 1.8; %***3;        % [m/s]         Max velocity
-v_coll  = 0.1%0.5;      % [m/s]         Max allowed collision velocity
+
+%**************************************************************************
+%v_coll  = 0.1%0.5;      % [m/s]         Max allowed collision velocity
+%**************************************************************************
 
 % delta_1 = 0;        % [m]           Max uncertainty at location 1
 % delta_2 = 0;        % [m]           Max uncertainty at location 2
 
 
-delta_1 = 0%3*cm;     % [m]           Max uncertainty at location 1
+%**************************************************************************
+%delta_1 = 0%3*cm;     % [m]           Max uncertainty at location 1
 %delta_2 = 2*cm;     % [m]           Max uncertainty at location 2
-delta_2 = 0*cm;     % [m]           Max uncertainty at location 2
+%delta_2 = 0*cm;     % [m]           Max uncertainty at location 2
+%**************************************************************************
+
+delta_2     = delta_1;
 
 x1      = 0;        % [m]       Item 1 location
 x2      = 922*mm; %***600*mm;   % [m]       Item 2 location
@@ -224,37 +238,43 @@ end     %   Calculate motion profile WITH uncertainty
 x           = x1 + [0 cumsum(Ts*v(1:(end-1)))];
 a           = [diff(v)/Ts 0];
 
-f1= figure;
-set(f1, 'DefaultLineLineWidth',3);
-plot(t_points, x_points, 'b*');
-hold on
-p12=stairs(t,x,'b');
-set(p12,'LineWidth',3);
-grid on
-xlabel('t [s]');
-ylabel('x [m]');
-title('Motion profile')
-
-f2= figure;
-set(f2, 'DefaultLineLineWidth',3);
-plot(t_points, v_points, 'r*');
-hold on
-p22=stairs(t,v,'r');
-set(p22,'LineWidth',3);
-grid on
-xlabel('t [s]');
-ylabel('v [m/s]');
-title('Velocity profile')
-
-f3= figure;
-set(f3, 'DefaultLineLineWidth',3);
-p22=stairs(t,a,'k');
-set(p22,'LineWidth',3);
-grid on
-xlabel('t [s]');
-ylabel('a [m/s^2]');
-title('Acceleration profile')
+if ~exist('no_fig') || no_fig == false,
+    
+    param_string = [ ' a\_max = ' num2str(a_max) '   v\_coll = ' num2str(v_coll) ...
+        '   delta = ' num2str(delta_1) ];
+    f1= figure;
+    set(f1, 'DefaultLineLineWidth',3);
+    plot(t_points, x_points, 'b*');
+    hold on
+    p12=stairs(t,x,'b');
+    set(p12,'LineWidth',3);
+    grid on
+    xlabel('t [s]');
+    ylabel('x [m]');
+    title([ 'Motion profile   ' param_string ])
+    
+    f2= figure;
+    set(f2, 'DefaultLineLineWidth',3);
+    plot(t_points, v_points, 'r*');
+    hold on
+    p22=stairs(t,v,'r');
+    set(p22,'LineWidth',3);
+    grid on
+    xlabel('t [s]');
+    ylabel('v [m/s]');
+    title([ 'Velocity profile   ' param_string])
+    
+    f3= figure;
+    set(f3, 'DefaultLineLineWidth',3);
+    p22=stairs(t,a,'k');
+    set(p22,'LineWidth',3);
+    grid on
+    xlabel('t [s]');
+    ylabel('a [m/s^2]');
+    title([ 'Acceleration profile   ' param_string])
+end
 
 disp('Motion analysis results:')
 disp([ 'Move time = ' num2str(tf) ' [s]'])
 
+temp = 2+2;

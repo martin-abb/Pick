@@ -58,10 +58,12 @@ Item1.jaw_start.z   = Item1.jaw.z + 300;    % start 300 mm above grip point for 
 
 Gripper_Suction.x       = 0;
 Gripper_Suction.y       = 0;
-Gripper_Suction.z       = 195;  %   account for approx. 5 mm compressions of suction cup / bellows to get a good grip
+Gripper_Suction.z       = 195;      % account for approx. 5 mm compressions of suction cup / bellows to get a good grip
+Gripper_Suction.m       = 1.0;      % [kg]  Gripper mass
 
 %   Jaw Gripper
 
 Gripper_Jaw.x           = 0;
 Gripper_Jaw.y           = 0;
 Gripper_Jaw.z           = 230;
+Gripper_Jaw.m           = 2.0;      % [kg]    Gripper mass
